@@ -1,12 +1,12 @@
-const express = require('express');
-const cors = require('cors');
-const { connect } = require('mongoose');
-require('dotenv').config();
-const upload = require('express-fileupload');
+const express = require("express");
+const cors = require("cors");
+const { connect } = require("mongoose");
+require("dotenv").config();
+const upload = require("express-fileupload");
 
-const userRoutes = require('./routes/userRoutes');
-const postRoutes = require('./routes/postRoutes');
-const { notFound, errorHandler } = require('./middleware/errorMiddleware');
+const userRoutes = require("./routes/userRoutes");
+const postRoutes = require("./routes/postRoutes");
+const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 
 const app = express();
 
@@ -29,11 +29,11 @@ app.use(cors({
 
 // 🧩 Subidas de archivos y carpeta estática
 app.use(upload());
-app.use('/uploads', express.static(__dirname + '/uploads'));
+app.use("/uploads", express.static(__dirname + "/uploads"));
 
 // 🧩 Rutas
-app.use('/api/users', userRoutes);
-app.use('/api/posts', postRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/posts", postRoutes);
 
 // 🧩 Middlewares de error
 app.use(notFound);
