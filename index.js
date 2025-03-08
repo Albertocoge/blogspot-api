@@ -19,6 +19,7 @@ app.use(cors({
   origin: [
     process.env.CLIENT_URL || "http://localhost:5173",
     "https://blogspot-app-mauve.vercel.app",
+    "https://blogspot-app-lyart.vercel.app"
   ],
   credentials: true, // Permitir cookies o autenticación
   methods: ["GET", "POST", "PUT", "DELETE"], // Métodos permitidos
