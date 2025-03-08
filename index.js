@@ -19,7 +19,8 @@ app.use(cors({
   origin: [
     process.env.CLIENT_URL || "http://localhost:5173",
     "https://blogspot-app-mauve.vercel.app",
-    "https://blogspot-app-lyart.vercel.app"
+    "https://blogspot-app-lyart.vercel.app",
+    "https://blogspot-app-testing.vercel.app"
   ],
   credentials: true, // Permitir cookies o autenticación
   methods: ["GET", "POST", "PUT", "DELETE"], // Métodos permitidos
@@ -39,10 +40,15 @@ app.use(notFound);
 app.use(errorHandler);
 
 // 🧩 Conexión a MongoDB y arranque del servidor
+const PORT = process.env.PORT || 5000;
+
 connect(process.env.MONGO_URI)
   .then(() => {
-    app.listen(process.env.PORT || 3000, () =>
-      console.log(`✅ Server running on port ${process.env.PORT}`)
-    );
+    app.listen(PORT, () => {
+      console.log(`✅ Servidor corriendo en el puerto ${PORT}`);
+    });
   })
-  .catch(error => console.error("❌ MongoDB connection error:", error));
+  .catch(error => {
+    console.error("❌ Error al conectar a MongoDB:", error);
+    process.exit(1);
+  });
